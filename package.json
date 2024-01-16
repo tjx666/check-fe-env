@@ -19,8 +19,11 @@
         "registry": "https://registry.npmjs.org/",
         "access": "public"
     },
-    "bin": "./dist/index.mjs",
-    "files": ["dist"],
+    "type": "module",
+    "bin": {
+        "check-fe-env": "bin/check-fe-env.mjs"
+    },
+    "files": ["bin", "dist"],
     "scripts": {
         "build": "unbuild --minify",
         "test": "node ./dist/index.mjs",
