@@ -4,14 +4,7 @@
     "description": "keep a consistent development environment between different developers",
     "packageManager": "pnpm@8.14.1",
     "license": "MIT",
-    "keywords": [
-        "node",
-        "npm",
-        "yarn",
-        "pnpm",
-        "fnm",
-        "nvm"
-    ],
+    "keywords": ["node", "npm", "yarn", "pnpm", "fnm", "nvm"],
     "author": {
         "name": "YuTengjing",
         "url": "https://github.com/tjx666",
@@ -30,10 +23,7 @@
     "bin": {
         "check-fe-env": "bin/check-fe-env.mjs"
     },
-    "files": [
-        "bin",
-        "dist"
-    ],
+    "files": ["bin", "dist"],
     "scripts": {
         "build": "unbuild --minify",
         "test": "node ./dist/index.mjs",

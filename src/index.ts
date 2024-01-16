@@ -5,8 +5,15 @@ import terminalLink from 'terminal-link';
 
 import { pathExists } from './utils';
 
-function exit(message: string, code = 1) {
-    console.log(`${bgRed(bold(' ERROR '))} ${message}`);
+function link(title: string, url: `http${string}`) {
+    return blue(terminalLink(title, url));
+}
+
+function exit(message: string | string[], code = 1) {
+    const messages = Array.isArray(message) ? message : [message];
+    for (const line of messages) {
+        console.log(`${bgRed(bold(' ERROR '))} ${line}`);
+    }
     process.exit(code);
 }
 
@@ -31,22 +38,20 @@ async function checkNodeVersion() {
 
     if (currentNodeVersion !== requiredNodeVersion) {
         const coloredRequiredVersion = green(requiredNodeVersion);
-        exit(
+        exit([
             `current node ${green(
                 currentNodeVersion,
-            )} isn't the same as ${coloredRequiredVersion} in .nvmrc，please toggle current node version to ${green(
-                requiredNodeVersion,
-            )}, recommend use ${blue(
-                terminalLink('fnm', 'https://github.com/Schniz/fnm'),
-            )} or ${blue(
-                terminalLink('nvm', 'https://github.com/nvm-sh/nvm'),
-            )} to manager node version.`,
-        );
+            )} isn't the same as required ${coloredRequiredVersion} in .nvmrc`,
+            `recommend use ${link('fnm', 'https://github.com/Schniz/fnm')} or ${link(
+                'nvm',
+                'https://github.com/nvm-sh/nvm',
+            )} to manage node version`,
+        ]);
     }
 }
 
 async function checkPm() {
-    const corepack = blue(terminalLink('corepack', 'https://nodejs.org/api/corepack.html'));
+    const corepack = link('corepack', 'https://nodejs.org/api/corepack.html');
 
     const pm = process.env.npm_config_user_agent!.split(' ')[0];
     const separatorPosition = pm.lastIndexOf('/');
@@ -55,23 +60,21 @@ async function checkPm() {
 
     const pkg = JSON.parse(await fs.readFile(path.resolve(process.cwd(), 'package.json'), 'utf8'));
     if (pkg.packageManager === undefined) {
-        exit(
-            `please specify "${yellow(
-                'packageManager',
-            )}" field in package.json, so ${corepack} will auto toggle to correspond package manager and version!`,
-        );
+        exit([
+            `please specify "${yellow('packageManager')}" field in package.json`,
+            `${corepack} will use that to switch correspond package manager and version`,
+        ]);
     }
 
     const [requiredPm, requiredPmVersion] = pkg.packageManager.split('@');
     const isPmMatch = currentPmName === requiredPm && currentPmVersion === requiredPmVersion;
     if (!isPmMatch) {
-        exit(
+        exit([
             `current package manager ${green(
                 `${currentPmName}@${currentPmVersion}`,
-            )} is not the same as required ${green(
-                `${requiredPm}@${requiredPmVersion}`,
-            )}, please enable the ${corepack} by run command: ${dim('corepack enable')}`,
-        );
+            )} is not the same as required ${green(`${requiredPm}@${requiredPmVersion}`)}`,
+            `please enable the ${corepack} by run command: ${dim('corepack enable')}`,
+        ]);
     }
 }
 
