@@ -1,0 +1,11 @@
+{
+    "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+    "extends": ["./node_modules/@yutengjing/biome-config/biome.json"],
+    "linter": {
+        "rules": {
+            "style": {
+                "noNonNullAssertion": "off"
+            }
+        }
+    }
+}

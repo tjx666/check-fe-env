@@ -1,0 +1,40 @@
+{
+    "name": "check-fe-env",
+    "version": "0.0.1",
+    "description": "keep a consistent development environment between different developers",
+    "packageManager": "pnpm@8.14.1",
+    "license": "MIT",
+    "keywords": ["node", "npm", "yarn", "pnpm", "fnm", "nvm"],
+    "author": {
+        "name": "YuTengjing",
+        "url": "https://github.com/tjx666",
+        "email": "ytj2713151713@gmail.com"
+    },
+    "homepage": "https://github.com/tjx666/check-fe-env/blob/main/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tjx666/check-fe-env"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    },
+    "bin": "./dist/index.mjs",
+    "files": ["dist"],
+    "scripts": {
+        "build": "unbuild --minify",
+        "test": "node ./dist/index.mjs",
+        "release": "bumpp -c \"release: v%s\" package.json && pnpm publish"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.5.2",
+        "@types/node": "^20.11.4",
+        "@yutengjing/biome-config": "^0.0.2",
+        "@yutengjing/tsconfig-node": "^0.0.5",
+        "bumpp": "^9.2.1",
+        "picocolors": "^1.0.0",
+        "terminal-link": "^3.0.0",
+        "typescript": "^5.3.3",
+        "unbuild": "^2.0.0"
+    }
+}
