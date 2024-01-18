@@ -4,10 +4,10 @@ keep a consistent development environment between different developers.
 
 will check:
 
-- nodejs version by `.nvmrc`
-- package manager type and it's version by the `packageManager` field of package.json
+- nodejs version: base on `.nvmrc`
+- package manager type and it's version: base on `packageManager` field of package.json
 
-recommend using [corepack](https://nodejs.org/api/corepack.html) to manage the package manager.
+recommend using [fnm](https://github.com/Schniz/fnm) to manage nodejs version and [corepack](https://nodejs.org/api/corepack.html) to manage the package manager.
 
 ## Usage
 
